@@ -11,3 +11,77 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* BARRE DE NAVIGATION */
+.navbarvolet {
+  background-color: #C5221F;
+}
+.navbarvolet a {
+  color: #FFF;
+}
+
+/* BREADCRUMBS */
+.breadvolet {
+  height: 32px;
+  padding-left: 42px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.breadvolet a {
+  color: #911A1A;
+}
+
+/* CARD ENTREPRISE */
+.entreprisesection {
+  max-width: 99%;
+}
+
+.cardform {
+  max-width: 50rem;
+  margin: 4rem auto;
+  animation: meals-appear 1s ease-out forwards;
+}
+
+
+.cardsmoise{
+  display: flex;
+}
+.cardsgauche {
+  width: 60%;
+  justify-content: flex-start;
+}
+.cardsdroite {
+  width: 40%;
+  justify-content: space-around;
+}
+
+.coordone1 {
+  display: flex;
+}
+.rue {
+  width: 75%;
+}
+.n {
+  width: auto;
+}
+
+.coordone2 {
+  display: flex;
+  margin-bottom: 10px;
+}
+.code-postal {
+  width: 40%;
+}
+.ville {
+  width: auto;
+}
+
+.telephone {
+  width: auto;
+}
+.e-mail {
+  width: auto;
+}
+.activite {
+  width: auto;
+}
