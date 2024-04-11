@@ -32,7 +32,7 @@ code {
 }
 
 /* CARD ENTREPRISE */
-.entreprisesection {
+.bodysection {
   max-width: 99%;
 }
 
@@ -47,11 +47,11 @@ code {
   display: flex;
 }
 .cardsgauche {
-  width: 60%;
+  width: 50%;
   justify-content: flex-start;
 }
 .cardsdroite {
-  width: 40%;
+  width: 50%;
   justify-content: space-around;
 }
 

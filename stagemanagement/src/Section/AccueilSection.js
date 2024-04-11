@@ -4,10 +4,10 @@ const AcceuilSection = () => {
     return (
         <>
             <Breadcrumb className='breadvolet'>
-                <Breadcrumb.Item href="./">Acceuil</Breadcrumb.Item>
+                <Breadcrumb.Item href="./">Accueil</Breadcrumb.Item>
             </Breadcrumb>
-            <section>
-
+            <section className='bodysection'>
+                
             </section>
         </>
     )

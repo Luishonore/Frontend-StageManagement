@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useState } from 'react';
 import NavBar from './components/headers/NavBar';
-import AcceuilSection from './Section/AcceuilSection';
+import AccueilSection from './Section/AccueilSection';
 import EntreprisesSection from './Section/EntreprisesSection';
+import AnnonceSection from './Section/AnnonceSection';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
       {/* HEADER */}
       <NavBar onNavigationClick={handleNavigationClick} />
       {/* BODY */}
-      {activeSection === 'accueil' && <AcceuilSection />}
+      {activeSection === 'accueil' && <AccueilSection />}
+      {activeSection === 'annonces' && <AnnonceSection />}
       {activeSection === 'entreprises' && <EntreprisesSection />}
       {/* Add conditionals for other sections here */}
     </>

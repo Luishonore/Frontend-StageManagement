@@ -17,6 +17,10 @@ const CoordoneForm = ({ society }) => {
             </div>
             <div className='telephone'><b>Téléphone : </b>{society.telephone}</div>
             <div className='e-mail'><b>E-mail : </b>{society.email}</div>
+            <div className='url'>
+                <b>Site web : </b>
+                <a href={society.url} target="blank">{society.url}</a>
+                </div>
             <div className='activite'><b>Secteur d'activité : </b>{society.activite}</div>
         </Card.Text>
     );

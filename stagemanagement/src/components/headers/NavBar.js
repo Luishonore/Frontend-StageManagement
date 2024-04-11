@@ -20,9 +20,9 @@ function NavBar({ onNavigationClick }) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={() => onNavigationClick('accueil')}>
-              Acceuil
+              Accueil
             </Nav.Link>
-            <Nav.Link onClick={() => onNavigationClick('annonces')} disabled>
+            <Nav.Link onClick={() => onNavigationClick('annonces')}>
               Annonces
             </Nav.Link>
             <Nav.Link onClick={() => onNavigationClick('entreprises')}>
