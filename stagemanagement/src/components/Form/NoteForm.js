@@ -14,7 +14,7 @@ const NoteForm = ({ societyNotes }) => {
         <Table>
           <tbody>
             <tr>
-              <td><b>Acceuil : </b></td>
+              <td><b>Accueil : </b></td>
               <td>{accueilAverage.toFixed(1)}</td>
             </tr>
             <tr>

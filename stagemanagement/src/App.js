@@ -4,12 +4,13 @@ import NavBar from './components/headers/NavBar';
 import AccueilSection from './Section/AccueilSection';
 import EntreprisesSection from './Section/EntreprisesSection';
 import AnnonceSection from './Section/AnnonceSection';
+import ZoneDeDepotSection from './Section/ZoneDeDepotSection';
+import FormulairesSection from './Section/FormulairesSection';
 
 
-function App() {
-
+const App = () => {
   //affichage conditionnel sections
-  const [activeSection, setActiveSection] = useState('accueil'); // Initial section
+  const [activeSection, setActiveSection] = useState('accueil'); // Section par défaut
   const handleNavigationClick = (sectionId) => {
     setActiveSection(sectionId);
   };
@@ -23,6 +24,8 @@ function App() {
       {activeSection === 'accueil' && <AccueilSection />}
       {activeSection === 'annonces' && <AnnonceSection />}
       {activeSection === 'entreprises' && <EntreprisesSection />}
+      {activeSection === 'formulaires' && <FormulairesSection />}
+      {/* activeSection === 'zonedepot' && <ZoneDeDepotSection /> */}
       {/* Add conditionals for other sections here */}
     </>
   );

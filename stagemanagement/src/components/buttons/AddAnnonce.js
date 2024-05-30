@@ -6,14 +6,13 @@ import FormAnnonce from '../Formulaire/FormAnnonce';
 function AddAnnonce() {
   // Affichage conditionnel
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   // Mise en page
   return (
     <>
-      <Button variant="danger" onClick={handleShow}>
+      <Button variant="danger" className='flexbouton' onClick={handleShow}>
         + Ajouter une annonce
       </Button>
 

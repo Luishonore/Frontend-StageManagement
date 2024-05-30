@@ -59,14 +59,15 @@ function FormAnnonce() {
 
         // Envoyer les données à l'API
         try {
-        const response = await axios.post(URL_ALLANNONCE, data);
-        console.log(response.data); // Affiche la réponse de l'API
-        // Gérer le succès de l'envoi
-        alert("Annonce créée avec succès !");
-        } catch (error) {
-        console.error("Erreur lors de l'envoi de l'annonce:", error);
-        // Gérer l'erreur de l'envoi
-        alert("Une erreur est survenue lors de la création de l'annonce.");
+            const response = await axios.post(URL_ALLANNONCE, data);
+            console.log(response.data); // Affiche la réponse de l'API
+            // Gérer le succès de l'envoi
+            alert("Annonce créée avec succès !");
+        } 
+        catch (error) {
+            console.error("Erreur lors de l'envoi de l'annonce:", error);
+            // Gérer l'erreur de l'envoi
+            alert("Une erreur est survenue lors de la création de l'annonce.");
         }
     };
 
@@ -88,8 +89,7 @@ function FormAnnonce() {
             {/* description */}
             <Form.Group className="mb-3">
                 <Form.Label>Description de l'annonce</Form.Label>
-                <Form.Control required as="textarea" rows={4} name="description" value={formData.description} onChange={handleChange}
-                />
+                <Form.Control required as="textarea" rows={4} name="description" value={formData.description} onChange={handleChange}/>
             </Form.Group>
             
             {/* tagSection */}

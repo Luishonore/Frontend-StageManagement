@@ -11,6 +11,7 @@ import NoteForm from '../Form/NoteForm.js';
 import { URL_ALLSOCIETES, URL_ALLNOTE } from '../../utils/Api.js';
 import pdfimg from '../../assets/images/file-pdf-solid-36.png';
 import emailimg from '../../assets/images/envelope-regular-36.png';
+import AddNote from '../buttons/AddNote.js';
 
 const CardsEntreprise = () => {
     const [societes, setSocietes] = useState([]);
@@ -55,9 +56,6 @@ const CardsEntreprise = () => {
         doc.save(`${society.nom}.pdf`);
     };
 
-    // bouton envoyer un mail
-    
-
     // Mise en page
     return (
         <Row xs={1} md={1} className="g-1">
@@ -73,13 +71,14 @@ const CardsEntreprise = () => {
                             <div className='cardsdroite'>
                                 <Card.Title>Notes moyennes ({society.notes.length}):</Card.Title>
                                 <NoteForm societyNotes={society.notes} />
+                                <AddNote societyId={society.idSociete}/>
                             </div>
                         </Card.Body>
                         <CardFooter>
-                            <Button href={`mailto:${society.email}`}>
+                            <Button href={`mailto:${society.email}`} className='buttonmargin'>
                                 <img alt="envoyer un E-mail" src={emailimg} />
                             </Button>
-                            <Button variant="danger" onClick={() => generatePDF(society)}>
+                            <Button variant="danger" onClick={() => generatePDF(society)} className='buttonmargin'>
                                 <img alt="télécharger la fiche en pdf" src={pdfimg} />
                             </Button>
                         </CardFooter>
