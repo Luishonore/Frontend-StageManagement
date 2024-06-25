@@ -21,6 +21,7 @@ const AnnonceSection = () => {
         return roles;
     };
 
+    // vérifie si l'utilisateur n'est pas un stagiaire
     useEffect(() => {
         const roles = getRolesFromToken();
         setIsStagiaire(roles.includes('Stagiaires'));

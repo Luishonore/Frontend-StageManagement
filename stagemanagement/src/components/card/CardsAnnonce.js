@@ -10,10 +10,14 @@ import CoordoneAnnonceForm from '../Form/CoordoneAnnonceForm.js';
 import AnnonceForm from '../Form/AnnonceForm.js';
 import pdfimg from '../../assets/images/file-pdf-solid-36.png';
 import jsPDF from 'jspdf';
+import CloseButton from 'react-bootstrap/CloseButton';
+import Modal from 'react-bootstrap/Modal';
 
 const CardsAnnonce = () => {
     const [annonces, setAnnonces] = useState([]);
-      
+    const [show, setShow] = useState(false);
+    const [selectedAnnonce, setSelectedAnnonce] = useState(null);
+
     useEffect(() => {
         const fetchData = async () => {
             const annoncesResponse = await axios.get(URL_ALLANNONCE);
@@ -30,11 +34,10 @@ const CardsAnnonce = () => {
 
             setAnnonces(mergedData);
         };
-      
+
         fetchData();
     }, []);
 
-    // generation et téléchargement du fichier PDF
     const generatePDF = (annonce) => {
         const doc = new jsPDF();
         doc.text(20, 20, `Nom : ${annonce.coordones.nom}`);
@@ -46,7 +49,7 @@ const CardsAnnonce = () => {
         doc.text(20, 80, `E-mail : ${annonce.coordones.email}`);
         doc.text(20, 90, `Site web : ${annonce.coordones.url}`);
         doc.text(20, 100, `Secteur d'activité : ${annonce.coordones.activite}`);
-        
+
         doc.text(20, 110, `Description de l'offre : ${annonce.description}`);
         doc.text(20, 120, `Contact : ${annonce.nomContact}, ${annonce.prenomContact}`);
         doc.text(20, 130, `E-mail de contact : ${annonce.emailContact}`);
@@ -54,14 +57,78 @@ const CardsAnnonce = () => {
         doc.save(`${annonce.coordones.nom}-annonce.pdf`);
     };
 
-    // Mise en page
+    const handleShow = (annonce) => {
+        setSelectedAnnonce(annonce);
+        setShow(true);
+    };
+
+    const handleClose = () => {
+        setSelectedAnnonce(null);
+        setShow(false);
+    };
+
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`${URL_ALLANNONCE}/${selectedAnnonce.idAnnonce}`);
+            setAnnonces(annonces.filter((annonce) => annonce.idAnnonce !== selectedAnnonce.idAnnonce));
+            handleClose();
+        } catch (error) {
+            console.error("There was an error deleting the annonce!", error);
+        }
+    };
+
+
+    const [isStudent, setIsStudent] = useState(false);
+
+    // Fonction pour récupérer les rôles de l'utilisateur 
+    const getRolesFromToken = () => {
+        // Check if token is available in localStorage
+        if (!localStorage.getItem('token')) {
+          return []; // Return an empty array if no token
+        }
+    
+        // Parse the JWT token
+        const token = localStorage.getItem('token');
+        const parsedToken = JSON.parse(atob(token.split('.')[1])); // Base64 decode the second part (payload)
+    
+        // Extract roles from 'resource_access' claim for your specific client ID
+        const roles = parsedToken.resource_access
+          ? parsedToken.resource_access['stagemanagement-react'].roles || []
+          : []; // Use your client ID if it's different
+    
+        return roles;
+      };
+      const roles = getRolesFromToken();
+
+      useEffect(() => {
+        setIsStudent(!roles.includes('Superviseur') && !roles.includes('Coordinateurs'));
+    }, [roles]);
+
+
     return (
         <>
             <Row xs={1} md={1} className="g-1">
                 {annonces.map((annonce, idx) => (
                     <Col key={idx}>
-                        <Card className='cardform'> 
-                            <Card.Header><b>{annonce.coordones.nom}</b></Card.Header>
+                        <Card className='cardform'>
+                            <Card.Header className='close'>
+                                <b>{annonce.coordones.nom}</b>
+                                {!isStudent &&<CloseButton onClick={() => handleShow(annonce)} />}
+                                <Modal show={show} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>{selectedAnnonce && selectedAnnonce.coordones.nom}</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>Êtes-vous sûr de vouloir supprimer cette annonce ?</Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleClose}>
+                                            Annuler
+                                        </Button>
+                                        <Button variant="danger" onClick={handleDelete}>
+                                            Confirmer la suppression
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                            </Card.Header>
                             <Card.Body className='cardsmoise'>
                                 <div className='cardsgauche'>
                                     <Card.Title>Description de l'offre : </Card.Title>

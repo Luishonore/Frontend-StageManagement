@@ -114,6 +114,11 @@ code {
 }
 
 .textaccueil {
-  font-size: 20px;
+  font-size: 22px;
   max-width: 60%;
+}
+
+.close {
+  display: flex;
+  justify-content: space-between;
 }

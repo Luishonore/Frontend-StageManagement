@@ -15,19 +15,19 @@ const NoteForm = ({ societyNotes }) => {
           <tbody>
             <tr>
               <td><b>Accueil : </b></td>
-              <td>{accueilAverage.toFixed(1)}</td>
+              <td>{accueilAverage.toFixed(1)} /5</td>
             </tr>
             <tr>
               <td><b>Charge : </b></td>
-              <td>{chargeAverage.toFixed(1)}</td>
+              <td>{chargeAverage.toFixed(1)} /5</td>
             </tr>
             <tr>
               <td><b>Implication : </b></td>
-              <td>{implicationAverage.toFixed(1)}</td>
+              <td>{implicationAverage.toFixed(1)} /5</td>
             </tr>
             <tr>
               <td><b>Lieu : </b></td>
-              <td>{lieuAverage.toFixed(1)}</td>
+              <td>{lieuAverage.toFixed(1)} /5</td>
             </tr>
           </tbody>
         </Table>

@@ -36,6 +36,27 @@ const CardsEntreprise = () => {
         fetchData();
     }, []);
 
+    const [isStudent, setIsStudent] = useState(false);
+
+    // Fonction pour récupérer les rôles de l'utilisateur 
+    const getRolesFromToken = () => {
+        if (!localStorage.getItem('token')) {
+          return []; 
+        }
+    
+        const token = localStorage.getItem('token');
+        const parsedToken = JSON.parse(atob(token.split('.')[1]));
+    
+        const roles = parsedToken.resource_access
+          ? parsedToken.resource_access['stagemanagement-react'].roles || []
+          : [];
+        return roles;
+    };
+    useEffect(() => {
+        const roles = getRolesFromToken();
+        setIsStudent(roles.includes('Stagiaires'));
+    }, []);
+
     // generation et téléchargement du fichier PDF
     const generatePDF = (society) => {
         const doc = new jsPDF();
@@ -69,9 +90,9 @@ const CardsEntreprise = () => {
                                 <CoordoneForm society={society} />
                             </div>
                             <div className='cardsdroite'>
-                                <Card.Title>Notes moyennes ({society.notes.length}):</Card.Title>
+                                <Card.Title>Notes moyennes ({society.notes.length} vote(s)):</Card.Title>
                                 <NoteForm societyNotes={society.notes} />
-                                <AddNote societyId={society.idSociete}/>
+                                {isStudent && <AddNote societyId={society.idSociete}/>}
                             </div>
                         </Card.Body>
                         <CardFooter>

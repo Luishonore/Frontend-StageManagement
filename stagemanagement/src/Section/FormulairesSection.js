@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import AddProposition from '../components/buttons/AddProposition';
 import SelectListProposition from '../components/buttons/SelectListProposition';
@@ -21,6 +21,27 @@ const FormulairesSection = () => {
         setShowValide(true);
     };
 
+    const [isStudent, setIsStudent] = useState(false);
+
+    // Fonction pour récupérer les rôles de l'utilisateur 
+    const getRolesFromToken = () => {
+        if (!localStorage.getItem('token')) {
+          return []; 
+        }
+    
+        const token = localStorage.getItem('token');
+        const parsedToken = JSON.parse(atob(token.split('.')[1]));
+    
+        const roles = parsedToken.resource_access
+          ? parsedToken.resource_access['stagemanagement-react'].roles || []
+          : [];
+        return roles;
+    };
+    useEffect(() => {
+        const roles = getRolesFromToken();
+        setIsStudent(roles.includes('Stagiaires'));
+    }, []);
+
     // Mise en page
     return (
         <>
@@ -29,7 +50,7 @@ const FormulairesSection = () => {
                 <Breadcrumb.Item active>Formulaires</Breadcrumb.Item>
             </Breadcrumb>
             <section className='bodysection'>
-                <AddProposition />
+                {isStudent && <AddProposition />}
                 <br />
                 
                 <SelectListProposition 
